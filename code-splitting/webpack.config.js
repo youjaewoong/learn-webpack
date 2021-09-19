@@ -1,4 +1,5 @@
 var path = require('path');
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: 'none', // production, development, none
@@ -11,8 +12,14 @@ module.exports = {
     rules: [
       {
         test: /\.css$/, //모든 css 파일 대상으로 아래 loader를 적용한다란 의미
-        use: ['style-loader', 'css-loader']
+        use: [
+          {loader: MiniCssExtractPlugin.loader}, 
+          'css-loader'
+        ]
       }
     ]
   },
+  plugins: [
+    new MiniCssExtractPlugin()
+  ]
 }
